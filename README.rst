@@ -56,7 +56,7 @@ Benefits over through-the-web customizations
 ----------------------------------------------
 
 Old Zope 2 customization methods that use the Zope Management Interface
-are seriously limited and rarely fulfill even of your development
+are seriously limited and rarely fulfill even half of your development
 needs. The ``youraddon`` template, however:
 
 * Provides the full power of Python:

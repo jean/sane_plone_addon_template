@@ -125,6 +125,9 @@ add-on::
 		...
 		youraddon
 
+.. Note:: If you are using the mr.developer_ extension, it will handle 
+    the ``develop`` configuration automatically.
+
 .. Note:: If you want to call your Python package something different than
     ``youraddon`` you can change this by running the ``personalize.py``
     command later.

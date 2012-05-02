@@ -4,7 +4,7 @@
  * This file is deployed as ++resource++youraddon/main.js on your site 
  * and automatically included in merge bundles via jsregistry.xml.
  *
- * More info
+ * More info:
  *
  * http://collective-docs.readthedocs.org/en/latest/templates_css_and_javascripts/javascript.html
  *
@@ -13,9 +13,8 @@
  /*global window*/
 
 (function($) {
-     
-     "use strict";
 
+     "use strict"; 
 
      $(document).ready(function() {
 

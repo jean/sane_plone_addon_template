@@ -9,8 +9,7 @@
  <!-- Activate this if you want to your code to behave as theme -->
  
  <skin-path name="youraddon" based-on="Sunburst Theme">
-  <layer name="youraddon"
-     insert-before="custom"/>
+   <layer name="youraddon" insert-before="custom"/>
  </skin-path>
 
 </object>

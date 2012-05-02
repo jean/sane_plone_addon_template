@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-"""
-
-    Creates a personally named version of youraddon.
+""" Creates a personally named version of youraddon.
 
     1. Copy to a new folder (assume we are in buildout/src)
 
@@ -21,29 +19,31 @@ import fnmatch
 
 TEMPLATE_NAME="youraddon"
 
-IGNORE_MASKS=["*.pyc", "*.pyo", "*.git*", "*.egg*", "*.EGG*"]
+IGNORE_MASKS = ["*.pyc", "*.pyo", "*.git*", "*.egg*", "*.EGG*"]
 
-FILES_TO_DELETE=[
-    ".git", 
-    "README.rst", 
-    "youraddon.egg-info", 
-    "youraddon/templates/helloworld.pt",
-    "youraddon/templates/myfooter.pt",
-    "youraddon/templates/plone.app.layout.viewlets.logo.pt",
-]
+FILES_TO_DELETE = [
+        ".git", 
+        "README.rst", 
+        "personalize.py",
+        "youraddon.egg-info", 
+        "youraddon/templates/helloworld.pt",
+        "youraddon/templates/myfooter.pt",
+        "youraddon/templates/plone.app.layout.viewlets.logo.pt",
+        ]
 
 def process(fname, newname):
-    """ """
+    """ Change references to the package name, and strip examples.
+    """
 
-    # See if we don't want to touch this file
+    # See whether we want to touch this file
     for mask in IGNORE_MASKS:
         if fnmatch.fnmatch(fname, mask):
             return
 
     # Do in-place replacement of template strings,
-    # all one of them.
-    # Because we are workin on a copy, don't be
-    # that pick about atomicity
+    # all of them.
+    # Because we are working on a copy, don't be
+    # that picky about atomicity.
     if not os.path.isdir(fname):
 
         # Read the source file
@@ -74,16 +74,16 @@ def process(fname, newname):
         f.write(data)
         f.close()
 
-    path, file = os.path.split(fname)
+    path, filename = os.path.split(fname)
 
-    if file == TEMPLATE_NAME:
+    if filename == TEMPLATE_NAME:
         # Rename youraddon folders to something else
         newname = os.path.join(path, newname)
         shutil.move(fname, newname)
 
+
 def post_cleanup(target, newname):
-    """
-    Remove unneeded files.
+    """ Remove unneeded files.
     """
 
     for f in FILES_TO_DELETE:
@@ -93,16 +93,18 @@ def post_cleanup(target, newname):
                 shutil.rmtree(fname)
             else:
                 os.remove(fname)
-                
+
+
 def fancy_replace(newname):
-    """ """
+    """ Copy the template module and call ``process`` on everything in it.
+    """
 
     source = os.getcwd()
 
     target = os.path.join(os.getcwd(), "..", newname)
     if os.path.exists(target):
         print "Already exists:" + target
-        print "Plese remove first"
+        print "Please remove it first."
         sys.exit(1)
 
     # Create a copy of the skeleton
@@ -122,8 +124,10 @@ def fancy_replace(newname):
 
     print "Created ../" + newname
 
+
 def main():
-    """ """
+    """ Commandline entrypoint.
+    """
 
     if len(sys.argv) < 2:
         print "Usage: ./personalize.py yourfancyname"

@@ -1,6 +1,4 @@
-"""
-
-	Plone views overrides.
+""" Plone views overrides.
 
 	For more information see
 
@@ -11,10 +9,12 @@
 # Zope imports
 from zope.interface import Interface
 from five import grok
+
+# Plone imports
 from Products.CMFCore.interfaces import ISiteRoot
 
 # Local imports
-from interfaces	import IAddonSpecific, IThemeSpecific
+from interfaces	import IThemeSpecific
 
 grok.templatedir("templates")
 grok.layer(IThemeSpecific)
@@ -31,8 +31,8 @@ class HelloWorld(grok.View):
 	http://localhost:8080/Plone/@@helloworld
 	"""
 
-
-	# use grok.context(Interface) to associate view with every content item
+    # use grok.context(Interface) to associate view with every content item
+    # instead
 	grok.context(ISiteRoot)
 
 # EXAMPLES END

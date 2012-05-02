@@ -1,4 +1,4 @@
-"""
+""" Plone viewlet overrides.
 
 	For more information see
 
@@ -15,21 +15,21 @@ from five import grok
 from plone.app.layout.viewlets.interfaces import IPortalFooter
 
 # Local imports
-from interfaces import IAddonSpecific, IThemeSpecific
+from interfaces import IAddonSpecific
 
 grok.templatedir("templates")
 grok.layer(IAddonSpecific)
 
 # By default, set context to zope.interface.Interface
-# which matches all the content items.
-# You can register viewlets to be content item type specific
-# by overriding grok.context() on class body level 
+# which matches all content items.
+# You can register viewlets to be content-type specific
+# by overriding grok.context() on class body level.
 grok.context(Interface)
 
 # EXAMPLES START
+
 class MyFooter(grok.Viewlet):
-	"""
-	An example viewlet.
+	""" An example viewlet.
 	"""
 
 	# For available viewlet managers see
@@ -37,10 +37,10 @@ class MyFooter(grok.Viewlet):
 	grok.viewletmanager(IPortalFooter)
 
 	def update(self):
-		"""
-		Set member variables before rendering the template.
+		""" Set member variables before rendering the template.
 
-		These variables are exposed via ``viewlet/`` traversing in page template code.
+        These variables are exposed via ``viewlet/`` traversing in page
+        template code.
 		"""
 
 		# See 

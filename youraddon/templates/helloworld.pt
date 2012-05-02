@@ -12,7 +12,7 @@
 	<metal:main fill-slot="content-core">
 	  <p>
 	  	Greeting from Finland. 
-	    Please visit at <a href="http://opensourcehacker.com">my blog</a>
+	    Please visit <a href="http://opensourcehacker.com">my blog</a>.
 	  </p> 
 	</metal:main>
 

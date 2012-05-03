@@ -6,7 +6,7 @@
 
     * http://wiki.python.org/moin/Distutils/Tutorial
 
-    * http://packages.python.org/distribute/setuptools.html#developer-s-
+    * http://packages.python.org/distribute/setuptools.html#developer-s-guide
 
     * http://plone.org/products/plone/roadmap/247
 

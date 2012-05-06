@@ -5,14 +5,14 @@ Introduction
 
 **A simple Plone add-on / theme skeleton with instructions**
 
-This project is a sane Plone 4 add-on / theme template which provides 
+This project is a sane Plone 4 add-on/theme template which provides 
 the ``youraddon`` code skeleton. It allows you to quickly start
 developing your own Python, CSS and JS code for Plone. 
 
 The skeleton is not limited to visual aspects, but
 allows easily customizing Plone UI aspects beyond simple CSS changes
 or HTML transformations. It is intended
-to replace the old *ZopeSkel plone* add-on template 
+to replace the old *ZopeSkel* ``plone`` add-on template 
 with a version embracing modern development best practices.
 
 Supported Plone versions
@@ -34,7 +34,7 @@ Goals
   with documented instructions.
 
 * Minimum boilerplate: no unnecessary ZCML or folder structure, etc.
-  Based on Grok and Dexterity frameworks.
+  Based on the Grok and Dexterity frameworks.
 
 * ``main.css`` and ``main.js`` where front-end developers can directly
   copy-paste their code.
@@ -176,14 +176,16 @@ Then run personalize::
 	./personalize mycompanyaddon 
 
 Please note that the template discourages usage of namespaces.
-Namespaces are not needed for your own customizations and cause extra boilerplate.
+Namespaces are not needed for your own customizations and cause extra
+boilerplate.
 If you wish to use namespaces like ``collective`` or ``plone.app`` you can
 manually shuffle files and folders around later.
 
 Now ``src/mycompanyaddon`` has been created. 
 ``src/youraddon`` will still be around for further templating.
 
-You need to do corresponding name changes in ``buildout.cfg`` and re-run buildout.
+You need to do corresponding name changes in ``buildout.cfg`` 
+and re-run buildout.
 Then restart Plone, and install the ``mycompanyaddon`` add-on.
 
 *personalize* will also remove the original version control files from the
@@ -196,7 +198,8 @@ Theme or add-on
 ==================
 
 The difference between a Plone theme and a Plone add-on is that
-only one theme can be active at a time. Resources like views,
+*only one* theme can be active at a time, while *many* add-ons can be 
+installed at once. Resources like views,
 static media, etc. depend on whether the theme / add-on layer is active or not.
 
 * The theme layer is activated through the ``portal_skins`` *properties* tab
@@ -208,12 +211,18 @@ static media, etc. depend on whether the theme / add-on layer is active or not.
 The code skeleton default behavior is add-on like.
 You can change it to theme-like behavior by:
 
-* Uncommenting directives in ``profiles/defaul/skins.xml``.
+* Uncommenting directives in ``profiles/default/skins.xml``.
 
 * Changing ``grok.layer()`` directives from ``IAddonSpecific`` to
-  ``IThemeSpecific``.
+  ``IThemeSpecific``. Look in: 
+  * ``youraddon/configure.zcml``;
+  * ``youraddon/interfaces.py`` (you can delete one or the other, 
+    depending on the type of add-on you're creating);
+  * ``youraddon/viewlets.py``;
+  * ``youraddon/views.py``;
+  * ``youraddon/profiles/default/browserlayer.xml``.
 
-More info
+More info:
 
 * http://collective-docs.readthedocs.org/en/latest/views/layers.html
 
@@ -241,11 +250,11 @@ in your Plone installation.
 Plone has a mechanism called *layers*, specifying which add-on and/or theme
 parts are effective. Once your add-on is installed,
 its layer takes the highest priority in the Plone installation,
-overriding functionality with lower priority. 
+overriding layers with lower priority. 
 
 Layers are the central element of any well-functioning 
 plug-in architecture, ensuring that add-ons don't
-step on each others toes, resulting in code conflicts.
+step on each others toes and cause code conflicts.
 
 Dive into
 ===========
@@ -253,24 +262,21 @@ Dive into
 This source code provides the Python package (a.k.a. *egg*) ``youraddon``.
 The package can be used as a Plone add-on to override Plone user interface functionality easily.
 
-The folder layout follows Python package layout where you have:
+The folder layout follows a Python package layout where you have:
 
 * a top-level folder with ``setup.py`` package metadata;
 
-* the ``youraddon`` Python module;
+* the ``youraddon`` Python module, which contains:
 
-* ``static``, a `Grok static folder
-  <http://collective-docs.readthedocs.org/en/latest/templates_css_and_javascripts/resourcefolders.html#grok-static-media-folder>`_
-  for images, CSS and Javascript;
-
-* ``views.py`` and ``viewlets.py`` for Plone user interface element declarations;
-
-* standard ``configure.zcml`` Zope 3 boiler-plate - no need to touch this.
+  * ``static``, a `Grok static folder`_ for images, CSS and Javascript; 
+  * ``views.py`` and ``viewlets.py`` for Plone user interface element declarations;
+  * standard ``configure.zcml`` Zope 3 boiler-plate - no need to touch this.
 
 Tasks
 ======
 
-Here are quick pointers for common theming / Plone UI customization related development tasks. 
+Here are quick pointers for common tasks relating to Plone theming and 
+UI customization. 
 
 Automatic Plone restarts
 ---------------------------
@@ -278,33 +284,29 @@ Automatic Plone restarts
 Use `sauna.reload`_ on UNIX systems to reload your code automatically.
 This will considerably increase your working effectiveness.
 
-When in development mode, even if not using ``sauna.reload``, Plone reloads
+When in development mode, even if not using `sauna.reload`_, Plone reloads
 the following bits automatically:
 
-* ``.pt`` page templates
-
-* CSS
-
-* Javascript
-
+* ``.pt`` page templates 
+* CSS 
+* Javascript 
 * ``profiles/default`` XML files
 
 The following code is not reloaded:
 
-* Python
-
+* Python 
 * ZCML
 
 Add a view
 ------------
 
 Views present functionality or content. Views can be associated with
-content types or site root.
+content types or with the site root.
 
 A *HelloWorld* view example is provided in ``views.py``.
 Feel free to copy-paste around.
 
-More info
+More info:
 
 * http://collective-docs.readthedocs.org/en/latest/views/browserviews.html
 
@@ -313,12 +315,12 @@ Finding view source code to override
 
 Plone views can be:
 
-* view classes (new style): these come from Python packages.
+* view classes (new style): these come from Python packages;
 
-* Pure page templates, no Python code attached (old style): these come from
-  the ``plone_skins`` tool
+* pure page templates, no Python code attached (old style): these come from
+  the ``plone_skins`` tool.
 
-More info
+More info:
 
 * http://collective-docs.readthedocs.org/en/latest/views/browserviews.html#finding-a-view-to-override
 
@@ -338,20 +340,20 @@ More info:
 Override a view template
 ---------------------------
 
-Use ``z3c.jbot`` override by dropping a corresponding 
+Use `z3c.jbot`_ overrides by dropping a corresponding 
 template in the ``templates`` folder.
 
-More info
+More info:
 
-* http://collective-docs.readthedocs.org/en/latest/views/browserviews.html 
+* http://collective-docs.readthedocs.org/en/latest/templates_css_and_javascripts/template_basics.html 
 
 Override a view class
 ---------------------------
 
-Same as the add view, but you simply use ``grok.name()``
-to declare the view name you want to override.
+Same as `Add a view`_, but you simply use ``grok.name()``
+to declare the view name that you want to override.
 
-More info
+More info:
 
 * http://collective-docs.readthedocs.org/en/latest/views/browserviews.html
 
@@ -542,4 +544,7 @@ Authors
 * Pony by `Lili / novotnaci <http://openclipart.org/detail/102193/foal-by-novotnaci>`_
 
 
+.. _z3c.jbot: http://pypi.python.org/pypi/z3c.jbot
 .. _sauna.reload: http://pypi.python.org/pypi/sauna.reload
+.. _Grok static folder: 
+   http://collective-docs.readthedocs.org/en/latest/templates_css_and_javascripts/resourcefolders.html#grok-static-media-folder
